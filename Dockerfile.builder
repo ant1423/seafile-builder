@@ -1,11 +1,11 @@
-FROM debian:buster-slim as builder
+FROM ubuntu:18.04 as builder
 LABEL MAINTAINER="twxl1993 <twxl1993@gmail.com>"
 
 ARG USEMIRROR=
 
 RUN [ x"$USEMIRROR" = x"y" ] && \
-    sed -i -r 's/[0-9a-z]+\.debian\.org/mirrors.163.com/' /etc/apt/sources.list; \
-    apt-get update && \
+    sed -i -r 's/[0-9a-z]+\.ubuntu\.com/mirrors.aliyun.com/' /etc/apt/sources.list; \
+    apt-get update --fix-missing && \
     apt-get install -y --no-install-recommends python-dev git python-pip; \
     git clone https://github.com/haiwen/seafile-rpi.git; \
     cp -f /seafile-rpi/build.sh /; rm -rf /seafile-rpi; \
